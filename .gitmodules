@@ -7,3 +7,6 @@
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = https://github.com/ervandew/supertab
+[submodule "bundle/tex--Tanzler"]
+	path = bundle/tex--Tanzler
+	url = https://github.com/vim-scripts/tex.vim--Tanzler.git
