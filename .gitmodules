@@ -10,3 +10,6 @@
 [submodule "bundle/tex--Tanzler"]
 	path = bundle/tex--Tanzler
 	url = https://github.com/vim-scripts/tex.vim--Tanzler.git
+[submodule "bundle/minibufexpl"]
+	path = bundle/minibufexpl
+	url = https://github.com/fholgado/minibufexpl.vim.git
