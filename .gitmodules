@@ -16,3 +16,9 @@
 [submodule "bundle/python-pep8-indent"]
 	path = bundle/python-pep8-indent
 	url = https://github.com/hynek/vim-python-pep8-indent.git
+[submodule "bundle/javascript-syntax"]
+	path = bundle/javascript-syntax
+	url = https://github.com/jelera/vim-javascript-syntax.git
+[submodule "bundle/javascript"]
+	path = bundle/javascript
+	url = https://github.com/pangloss/vim-javascript.git
