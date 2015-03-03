@@ -13,6 +13,6 @@ Install submodules:
 
 Update submodules:
 
-    git submodule foreach git pull
+    git submodule foreach git pull origin master
 
 More info: [Vimcasts](http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/)
