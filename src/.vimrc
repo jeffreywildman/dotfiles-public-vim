@@ -3,9 +3,9 @@ execute pathogen#infect()
 
 
 " Initialization
+set shortmess=atI " Don’t show the intro message when starting Vim
 set nocompatible " Disable vi-compatibility (more efficient).
 set fileformats=unix,dos,mac " Set file end-of-line priority.
-filetype plugin indent on " Automatically detect file types, and enable file-type-specific plugins and indentation.
 
 
 " Terminal / GUI
@@ -18,8 +18,12 @@ let g:zenburn_high_Contrast=1
 let g:zenburn_alternate_Visual=1
 colorscheme zenburn
 
+" Specify highlighted column color
+highlight ColorColumn ctermbg=236
 
-" Status Line
+
+" Status Lines
+set title " Show the filename in the window titlebar
 set laststatus=2 " Always show status line.
 set shortmess=at " Shortens messages in status line, truncates long messages.
 set showcmd " Display an incomplete command in status line.
@@ -36,6 +40,7 @@ set hlsearch " Highlight search.
 set smartcase " Be case sensitive when input has a capital letter.
 set incsearch " Show matches while typing.
 set ignorecase " Ignore case when searching.
+set gdefault " Add the g flag to search/replace by default
 " Clear last search
 map <Bslash><Bslash> :nohlsearch<CR>
 
@@ -59,14 +64,9 @@ set wildignore+=*/CVS/,*/.svn/,*/.git/ " Ignore version control files
 " Indentation
 set autoindent " On for smartindent below.
 set smartindent " Automatically set the indent of a new line (local to buffer).
-" expandtab = All tabs will be spaces.
-" softabstop = How many spaces will a tab take when 'expandtab' is on.
-" smarttab = delete chunks of spaces like tabs.
-" tabstop = How many spaces is a tab (visually).
-" shiftwidth = How many spaces will a 'shift' command take.
-autocmd FileType * setlocal expandtab smarttab tabstop=2 softtabstop=2 shiftwidth=2 " This includes default behaviour.
-autocmd FileType python setlocal ts=4 sts=4 sw=4
-autocmd FileType html,javascript,css setlocal ts=4 sts=4 sw=4
+set modeline " Respect modeline in files
+set modelines=4 " Number of lines to search for modeline
+
 
 
 " Formatting
@@ -77,27 +77,6 @@ set linebreak " Wrap at word.
 set textwidth=0 " Desirable text width. Used for text auto-wrapping. 0 means no auto-wrapping.
 " Force formatting of the current paragraph
 nmap <C-G> gwap
-autocmd FileType * set formatoptions=r nocindent colorcolumn=+1
-" Enable auto-wrapping comments, comment leader auto-insertion in <Insert> mode,
-" auto-format paragraphs, keep last line indentation. Disable all other format options.
-" NOTE: Requires 'set autoindent'. autocmd FileType is required since formatoptions is
-" set differently for each file type (.c, .py, etc.).
-autocmd BufRead,BufNewFile *.txt set filetype=text
-autocmd BufRead,BufNewFile *.am set filetype=automake
-autocmd BufRead,BufNewFile *.cu,*.cuh set filetype=cpp
-autocmd BufRead,BufNewFile *.bbx,*.cbx set filetype=plaintex
-
-
-" FileType Specific Options
-autocmd FileType make,automake setlocal noexpandtab
-autocmd FileType tex,plaintex,bib set textwidth=120 wrap formatoptions+=q colorcolumn=""
-autocmd FileType text set textwidth=120 wrap formatoptions+=tqn
-" set cinoptions=>s,{0,}0,?0,^0,:0,=s,g0,p0,t0,+s,(0,)20,*30
-" autocmd FileType python,pl,java,h,hpp,c,cpp,cuda set textwidth=120 formatoptions+=coq cindent
-" autocmd FileType java,h,hpp,c,cpp,cuda set comments=sr:/*,mb:*,ex:*/
-" autocmd FileType java,h,hpp,c,cpp,cuda set comments=bsl:///,m://,be:///
-
-highlight ColorColumn ctermbg=236
 
 
 " Folding
@@ -108,18 +87,19 @@ set foldopen=block,hor,tag,percent,mark,quickfix " What movements open folds.
 
 
 " Backup
-set backup " Disable file backup before file overwrite attempt.
-set backupdir=/tmp,.
-set writebackup
+" Centralize backups, swapfiles and undo history
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+if exists("&undodir")
+  set undodir=~/.vim/undo
+endif
+" Don’t create backups when editing files in certain directories
+set backupskip=/tmp/*,/private/tmp/*
 
 
 " Invisible characters.
-if ! has("win32")
-    set listchars=tab:▸\ ,trail:¬,eol:« " Invisible characters.
-    "set listchars=tab:°\ ,trail:·,eol:☠ " Alternate invisible characters.
-endif
-"set list " Display invisible characters.
-set nolist " Don't display invisible characters.
+set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:_ " Invisible characters
+set list " Display invisible characters.
 
 
 "" Mouse
@@ -138,13 +118,14 @@ set noerrorbells " No noise.
 
 " General
 
+set ttyfast " Optimize for fast terminal connections
 set history=256 " Number of things to remember in history.
 set timeoutlen=250 " Time to wait after ESC (default causes an annoying delay).
 set hidden " The current buffer can be put to the background without writing to disk.
 
-"autocmd BufWinEnter * lcd %:p:h " Sets current-directory of current buffer/file. We avoid using `set autchdir` instead, because it can cause problems with some plugins.
-"autocmd bufwritepost .vimrc source $MYVIMRC " Source .vimrc after saving it.
-nmap <Leader>s :source ~/.vimrc<CR>
+" Easily edit/source $MYVIMRC
+nmap <leader>ev :edit $MYVIMRC<CR>
+nmap <leader>sv :source $MYVIMRC<CR>
 
 set backspace=indent,eol,start " Enable backspace key. Erase previously entered characters in insert mode.
 
@@ -154,6 +135,13 @@ set shell=/bin/bash
 " Open a shell
 map <C-Z> :shell<CR>
 
+set nostartofline " Don’t reset cursor to start of line when moving around.
+set scrolloff=3 " Start scrolling three lines before the horizontal window border
+
+" Enable per-directory .vimrc files and disable unsafe commands in them
+set exrc
+set secure
+
 
 " MiniBufExplorer Configuration
 " cycle buffers forward and backward
@@ -162,9 +150,9 @@ nmap <C-p> :MBEbp<CR>
 " allow cycling around the end of buffer list
 let g:miniBufExplCycleArround = 1
 
-map <Leader>b :MBEOpen<CR>
-map <Leader>c :MBEClose<CR>
-map <Leader>t :MBEToggle<CR>
+map <leader>b :MBEOpen<CR>
+map <leader>c :MBEClose<CR>
+map <leader>t :MBEToggle<CR>
 
 " always display MBE
 let g:miniBufExplBuffersNeeded = 1
@@ -182,8 +170,8 @@ let g:miniBufExplBuffersNeeded = 1
 "let Tlist_WinWidth = 60
 ""let Tlist_Compact_Format = 1
 "let Tlist_Exit_OnlyWindow = 1
-"nnoremap <silent> <Leader>TO :Tlist<CR>
-"nnoremap <silent> <Leader>TC :TlistClose<CR>
+"nnoremap <silent> <leader>TO :Tlist<CR>
+"nnoremap <silent> <leader>TC :TlistClose<CR>
 "
 ""Stuff for ctags
 "let g:ctags_path = '/usr/bin/ctags'
@@ -208,3 +196,50 @@ let g:miniBufExplBuffersNeeded = 1
 "
 "  command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 "endif
+
+
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+  let save_cursor = getpos(".")
+  let old_query = getreg('/')
+  :%s/\s\+$//e
+  call setpos('.', save_cursor)
+  call setreg('/', old_query)
+endfunction
+noremap <leader>ss :call StripWhitespace()<CR>
+
+
+" Automatic commands
+if has("autocmd")
+  " Filetype Detection
+  filetype plugin indent on " Automatically detect file types, and enable file-type-specific plugins and indentation
+  autocmd BufNewFile,BufRead *.txt        setlocal filetype=text
+  autocmd BufNewFile,BufRead *.am         setlocal filetype=automake
+  autocmd BufNewFile,BufRead *.cu,*.cuh   setlocal filetype=cpp
+  autocmd BufNewFile,BufRead *.bbx,*.cbx  setlocal filetype=plaintex
+
+
+  " FileType Specific Options
+  autocmd FileType *                setlocal formatoptions=r nocindent colorcolumn=+1
+  autocmd FileType make,automake    setlocal noexpandtab
+  autocmd FileType tex,plaintex,bib setlocal textwidth=120 wrap formatoptions+=q colorcolumn=""
+  autocmd FileType text             setlocal textwidth=120 wrap formatoptions+=tqn
+  " Enable auto-wrapping comments, comment leader auto-insertion in <Insert> mode,
+  " auto-format paragraphs, keep last line indentation. Disable all other format options.
+  " NOTE: Requires 'set autoindent'. autocmd FileType is required since formatoptions is
+  " set differently for each file type (.c, .py, etc.).
+  " set cinoptions=>s,{0,}0,?0,^0,:0,=s,g0,p0,t0,+s,(0,)20,*30
+  " autocmd FileType python,pl,java,h,hpp,c,cpp,cuda set textwidth=120 formatoptions+=coq cindent
+  " autocmd FileType java,h,hpp,c,cpp,cuda set comments=sr:/*,mb:*,ex:*/
+  " autocmd FileType java,h,hpp,c,cpp,cuda set comments=bsl:///,m://,be:///
+
+  " FileType Specific Indentation
+  " expandtab = All tabs will be spaces.
+  " softabstop = How many spaces will a tab take when 'expandtab' is on.
+  " smarttab = delete chunks of spaces like tabs.
+  " tabstop = How many spaces is a tab (visually).
+  " shiftwidth = How many spaces will a 'shift' command take.
+  autocmd FileType * setlocal expandtab smarttab tabstop=2 softtabstop=2 shiftwidth=2 " This includes default behaviour.
+  autocmd FileType python setlocal ts=4 sts=4 sw=4
+  autocmd FileType html,javascript,css setlocal ts=4 sts=4 sw=4
+endif
