@@ -1,32 +1,32 @@
-[submodule "bundle/pathogen"]
-	path = bundle/pathogen
+[submodule "src/.vim/bundle/pathogen"]
+	path = src/.vim/bundle/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 	branch = master
-[submodule "bundle/zenburn"]
-	path = bundle/zenburn
+[submodule "src/.vim/bundle/zenburn"]
+	path = src/.vim/bundle/zenburn
 	url = https://github.com/jnurmine/Zenburn.git
 	branch = master
-[submodule "bundle/supertab"]
-	path = bundle/supertab
+[submodule "src/.vim/bundle/supertab"]
+	path = src/.vim/bundle/supertab
 	url = https://github.com/ervandew/supertab
 	branch = master
-[submodule "bundle/tex--Tanzler"]
-	path = bundle/tex--Tanzler
+[submodule "src/.vim/bundle/tex--Tanzler"]
+	path = src/.vim/bundle/tex--Tanzler
 	url = https://github.com/vim-scripts/tex.vim--Tanzler.git
 	branch = master
-[submodule "bundle/minibufexpl"]
-	path = bundle/minibufexpl
+[submodule "src/.vim/bundle/minibufexpl"]
+	path = src/.vim/bundle/minibufexpl
 	url = https://github.com/fholgado/minibufexpl.vim.git
 	branch = master
-[submodule "bundle/python-pep8-indent"]
-	path = bundle/python-pep8-indent
+[submodule "src/.vim/bundle/python-pep8-indent"]
+	path = src/.vim/bundle/python-pep8-indent
 	url = https://github.com/hynek/vim-python-pep8-indent.git
 	branch = master
-[submodule "bundle/javascript-syntax"]
-	path = bundle/javascript-syntax
+[submodule "src/.vim/bundle/javascript-syntax"]
+	path = src/.vim/bundle/javascript-syntax
 	url = https://github.com/jelera/vim-javascript-syntax.git
 	branch = master
-[submodule "bundle/javascript"]
-	path = bundle/javascript
+[submodule "src/.vim/bundle/javascript"]
+	path = src/.vim/bundle/javascript
 	url = https://github.com/pangloss/vim-javascript.git
 	branch = master
