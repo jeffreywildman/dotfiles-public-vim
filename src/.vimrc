@@ -87,11 +87,11 @@ set foldopen=block,hor,tag,percent,mark,quickfix " What movements open folds.
 
 
 " Backup
-" Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+" Centralize backups, swapfiles and undo history with decentralized fallback
+set backupdir=~/.vim/backups,.,~/tmp,~/
+set directory=~/.vim/swaps,.,~/tmp,/var/tmp,/tmp
 if exists("&undodir")
-  set undodir=~/.vim/undo
+  set undodir=~/.vim/undo,.
 endif
 " Don’t create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
