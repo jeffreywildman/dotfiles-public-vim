@@ -3,23 +3,23 @@ This repository contains my vim setup.  It uses pathogen to manage plugins insta
 
 * Use dotfiles-framework to bring this repo under the fold:
 
-      cd ~/dotfiles
-      dotfiles.sh clone public-vim git git@github.com:jeffreywildman/dotfiles-public-vim.git
+        cd ~/dotfiles
+        dotfiles.sh clone public-vim git git@github.com:jeffreywildman/dotfiles-public-vim.git
 
 * Install vim plugin submodules before patching and linking:
 
-      cd ~/dotfiles/public-vim
-      git submodule update --init
-      cd ~/dotfiles
-      dotfiles.sh patch public-vim
-      dotfiles.sh link public-vim
+        cd ~/dotfiles/public-vim
+        git submodule update --init
+        cd ~/dotfiles
+        dotfiles.sh patch public-vim
+        dotfiles.sh link public-vim
 
 * Fetching/updating using the dotfiles-framework:
 
-      cd ~/dotfiles
-      dotfiles.sh fetch public-vim
-      cd ~/dotfiles/public-vim
-      git submodule update --remote
+        cd ~/dotfiles
+        dotfiles.sh fetch public-vim
+        cd ~/dotfiles/public-vim
+        git submodule update --remote
 
 
 Acknowledgements
