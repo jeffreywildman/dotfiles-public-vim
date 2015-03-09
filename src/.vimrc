@@ -213,6 +213,7 @@ noremap <leader>ss :call StripWhitespace()<CR>
 if has("autocmd")
   " Filetype Detection
   filetype plugin indent on " Automatically detect file types, and enable file-type-specific plugins and indentation
+  autocmd BufNewFile,BufRead .bash_*      setlocal filetype=sh
   autocmd BufNewFile,BufRead *.txt        setlocal filetype=text
   autocmd BufNewFile,BufRead *.am         setlocal filetype=automake
   autocmd BufNewFile,BufRead *.cu,*.cuh   setlocal filetype=cpp
