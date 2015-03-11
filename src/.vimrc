@@ -222,7 +222,6 @@ if has("autocmd")
 
   " FileType Specific Options
   autocmd FileType *                setlocal formatoptions=r nocindent colorcolumn=+1
-  autocmd FileType make,automake    setlocal noexpandtab
   autocmd FileType tex,plaintex,bib setlocal textwidth=120 wrap formatoptions+=q colorcolumn=""
   autocmd FileType text             setlocal textwidth=120 wrap formatoptions+=tqn
   " Enable auto-wrapping comments, comment leader auto-insertion in <Insert> mode,
@@ -240,7 +239,8 @@ if has("autocmd")
   " smarttab = delete chunks of spaces like tabs.
   " tabstop = How many spaces is a tab (visually).
   " shiftwidth = How many spaces will a 'shift' command take.
-  autocmd FileType * setlocal expandtab smarttab tabstop=2 softtabstop=2 shiftwidth=2 " This includes default behaviour.
-  autocmd FileType python setlocal ts=4 sts=4 sw=4
-  autocmd FileType html,javascript,css setlocal ts=4 sts=4 sw=4
+  autocmd FileType *                    setlocal expandtab smarttab tabstop=2 softtabstop=2 shiftwidth=2 " This includes default behaviour.
+  autocmd FileType make,automake        setlocal noexpandtab
+  autocmd FileType python               setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd FileType html,javascript,css  setlocal tabstop=4 softtabstop=4 shiftwidth=4
 endif
