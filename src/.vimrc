@@ -218,6 +218,7 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.am         setlocal filetype=automake
   autocmd BufNewFile,BufRead *.cu,*.cuh   setlocal filetype=cpp
   autocmd BufNewFile,BufRead *.bbx,*.cbx  setlocal filetype=plaintex
+  autocmd BufNewFile,BufRead *.tsv        setlocal filetype=tsv
 
 
   " FileType Specific Options
@@ -243,4 +244,5 @@ if has("autocmd")
   autocmd FileType make,automake        setlocal noexpandtab
   autocmd FileType python               setlocal tabstop=4 softtabstop=4 shiftwidth=4
   autocmd FileType html,javascript,css  setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd FileType tsv                  setlocal tabstop=15 softtabstop=4 shiftwidth=4
 endif
