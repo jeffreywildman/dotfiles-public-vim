@@ -243,6 +243,6 @@ if has("autocmd")
   autocmd FileType *                    setlocal expandtab smarttab tabstop=2 softtabstop=2 shiftwidth=2 " This includes default behaviour.
   autocmd FileType make,automake        setlocal noexpandtab
   autocmd FileType python               setlocal tabstop=4 softtabstop=4 shiftwidth=4
-  autocmd FileType html,javascript,css  setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd FileType html,javascript,css  setlocal tabstop=2 softtabstop=2 shiftwidth=2
   autocmd FileType tsv                  setlocal tabstop=15 softtabstop=4 shiftwidth=4
 endif
